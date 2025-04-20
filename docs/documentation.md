@@ -1,213 +1,240 @@
 # University Timetable Optimizer Documentation
 
-## Overview
+## 1. System Overview
 
-The University Timetable Optimizer is a web-based application that uses evolutionary algorithms to automatically generate optimal course timetables. The system considers various constraints such as room availability, lecturer schedules, and course durations to create conflict-free timetables.
+The University Timetable Optimizer is a sophisticated web-based application that leverages evolutionary algorithms to generate optimal course schedules. It addresses the complex challenge of creating conflict-free timetables while satisfying multiple constraints and preferences.
 
-## System Architecture
+### 1.1 Key Features
 
-### 1. Core Components
+- Automated timetable generation using PSO and GA
+- Constraint-based scheduling
+- Interactive web interface
+- Real-time conflict detection
+- Flexible data management
+- Schedule visualization and statistics
 
-#### Data Models (src/models/timetable.py)
-- **Course**: Represents a university course
-  - Properties: id, name, duration, required_rooms, lecturer
-- **Lecturer**: Represents a teaching staff member
-  - Properties: id, name, available_slots
-- **TimeSlot**: Represents a scheduled time slot
-  - Properties: day, period, room
-- **Timetable**: Main class for timetable management
-  - Handles scheduling logic and constraint checking
+## 2. Technical Architecture
 
-#### Optimization Algorithms (src/algorithms/)
+### 2.1 Core Components
 
-1. **Particle Swarm Optimization (pso.py)**
-   - Population-based optimization technique
-   - Each particle represents a potential timetable solution
-   - Parameters:
-     - Number of particles
-     - Number of iterations
-     - Inertia weight
-     - Cognitive and social weights
-     - Maximum velocity
+#### Data Models (`src/models/timetable.py`)
+- **Course**
+  ```python
+  class Course:
+      id: int
+      name: str
+      duration: int
+      required_rooms: List[int]
+      lecturer: int
+  ```
+- **Lecturer**
+  ```python
+  class Lecturer:
+      id: int
+      name: str
+      available_slots: List[List[int]]  # [day, period] pairs
+  ```
+- **TimeSlot**
+  ```python
+  class TimeSlot:
+      day: int        # 0-4 (Mon-Fri)
+      period: int     # 0-7 (8 periods/day)
+      room: int       # 0-7 (8 rooms)
+  ```
+- **Timetable**
+  - Manages scheduling logic
+  - Handles constraint validation
+  - Calculates fitness scores
 
-2. **Genetic Algorithm (genetic.py)**
-   - Evolutionary optimization approach
-   - Uses natural selection principles
-   - Features:
-     - Tournament selection
-     - Uniform crossover
-     - Adaptive mutation
-     - Elitism
+### 2.2 Optimization Algorithms
 
-### 2. Data Management
+#### 2.2.1 Particle Swarm Optimization (`src/algorithms/pso.py`)
+- **Features**:
+  - Population-based optimization
+  - Adaptive inertia weight
+  - Velocity clamping
+  - Global and local best memory
+- **Parameters**:
+  - Number of particles (20-100)
+  - Number of iterations (50-200)
+  - Inertia weight (0.4-0.9)
+  - Cognitive/social weights (1.5-2.5)
 
-#### JSON Data Storage
-- **courses.json**: Stores course information
+#### 2.2.2 Genetic Algorithm (`src/algorithms/genetic.py`)
+- **Features**:
+  - Tournament selection
+  - Uniform crossover
+  - Adaptive mutation
+  - Elitism preservation
+- **Parameters**:
+  - Population size (50-200)
+  - Number of generations (100-500)
+  - Mutation rate (0.1-0.3)
+  - Tournament size (3-5)
+  - Elite size (2-5)
+
+### 2.3 Data Management
+
+#### 2.3.1 JSON Storage
+- **courses.json**
   ```json
   {
-    "id": 9,
-    "name": "Machine Learning",
+    "id": 1,
+    "name": "Computer Science 101",
     "duration": 2,
     "required_rooms": [0, 2],
-    "lecturer": 5
+    "lecturer": 1
   }
   ```
-- **lecturers.json**: Stores lecturer information
+- **lecturers.json**
   ```json
   {
     "id": 1,
     "name": "Dr. Hossam",
-    "available_slots": [[0,1], [0,2], [1,3]]  // [day, period] pairs
+    "available_slots": [[0,1], [0,2], [1,3]]
   }
   ```
 
-### 3. User Interface (app.py)
+## 3. Implementation Details
 
-#### Main Features
+### 3.1 Constraint Handling
+
+#### Hard Constraints
+1. **Room Conflicts**
+   - No double-booking of rooms
+   - Room type requirements must be met
+
+2. **Lecturer Conflicts**
+   - No overlapping schedules
+   - Respect availability preferences
+
+3. **Course Requirements**
+   - Duration must be respected
+   - All sessions must be scheduled
+
+#### Soft Constraints
+1. **Optimization Goals**
+   - Minimize travel time between rooms
+   - Balance room utilization
+   - Maximize preferred time slots
+
+### 3.2 Solution Encoding
+
+- **Format**: Array of real numbers
+- **Structure**: [day₁, period₁, room₁, day₂, period₂, room₂, ...]
+- **Decoding**:
+  - Values rounded to integers
+  - day mod 5 (0-4)
+  - period mod 8 (0-7)
+  - room based on requirements
+
+### 3.3 Fitness Function
+
+```python
+def fitness_function(solution):
+    # Hard constraints
+    conflicts = check_conflicts(solution)
+    if conflicts > 0:
+        return float('inf')
+    
+    # Soft constraints
+    score = 0
+    score += calculate_travel_time(solution)
+    score += calculate_room_balance(solution)
+    score += calculate_time_preferences(solution)
+    return score
+```
+
+## 4. User Interface
+
+### 4.1 Main Components
 1. **Data Management**
-   - Add/remove courses and lecturers
-   - Set course requirements
-   - Define lecturer availability
+   - Course creation/editing
+   - Lecturer management
+   - Room configuration
 
 2. **Algorithm Settings**
-   - Choose optimization algorithm (PSO or GA)
-   - Configure algorithm parameters
-   - Set optimization constraints
+   - Algorithm selection
+   - Parameter configuration
+   - Constraint weighting
 
-3. **Timetable Display**
-   - Interactive timetable view
-   - Filter by days and rooms
-   - Clear visualization of course and lecturer assignments
+3. **Timetable View**
+   - Interactive grid display
+   - Filtering options
+   - Conflict highlighting
 
-## 🖼️ Application Screens
+### 4.2 Workflow
+1. **Setup Phase**
+   - Add/edit courses
+   - Configure lecturer availability
+   - Set room constraints
 
-Below are key screens illustrating the application UI and workflow:
+2. **Optimization Phase**
+   - Select algorithm
+   - Adjust parameters
+   - Run optimization
 
-- **Home Page**  
-  ![Home Page](../Misc/home.png)
+3. **Review Phase**
+   - View generated timetable
+   - Check statistics
+   - Make manual adjustments
 
-- **Manage Courses**  
-  ![Manage Courses](../Misc/ManageCourses.png)
+## 5. Performance Considerations
 
-- **Existing Courses View**  
-  ![Existing Courses View](../Misc/Existing_Courses.png)
+### 5.1 Optimizations
+- Efficient data structures for conflict checking
+- Parallel fitness evaluation
+- Caching of intermediate results
+- Early termination for invalid solutions
 
-- **Manage Lecturers**  
-  ![Manage Lecturers](../Misc/Manage_Lectures.png)
+### 5.2 Scalability
+- Handles up to 100 courses
+- Supports 50+ lecturers
+- 8 time periods per day
+- 5 working days
+- 8 different rooms
 
-- **Existing Lecturers View**  
-  ![Existing Lecturers View](../Misc/Existing_Lectures.png)
+## 6. Future Enhancements
 
-- **Algorithm Settings**  
-  ![Algorithm Settings](../Misc/Algorithm_Setting.png)
-
-- **Algorithm Choosing & Parameters**  
-  ![Algorithm Choosing & Parameters](../Misc/Algorithm_Choosing_Parameters.png)
-
-- **Timetable Before Optimization**  
-  ![Timetable Before Optimization](../Misc/Timetable_before_Applied_Algoirthm.png)
-
-- **Timetable After PSO**  
-  ![Timetable After PSO](../Misc/Timetable_after_applying_pso.png)
-
-- **Timetable After GA**  
-  ![Timetable After GA](../Misc/Timetable_after_applying_genetic.png)
-
-- **Schedule Statistics**  
-  ![Schedule Statistics](../Misc/Scheduled_Stat.png)
-
-
-## Current Faculty and Courses
-
-### Faculty Members
-The current faculty members in the system include:
-- Dr. Wael (ID: 0) - Physics Department
-- Dr. Hossam (ID: 1) - Computer Science Department
-- Dr. Islam (ID: 2) - Mathematics Department
-- Dr. Khaled (ID: 3) - Chemistry Department
-- Dr. Ahmed Ali (ID: 4) - Biology Department
-
-### Featured Courses
-The system currently includes the following courses:
-- Physics 101 & 102 (Dr. Wael)
-- Computer Science 101 & 102 (Dr. Hossam)
-- Mathematics 101 (Dr. Islam)
-- Chemistry 101 (Dr. Khaled)
-- Biology 101 (Dr. Ahmed Ali)
-- Engineering 101
-- Art 101
-- Machine Learning (New addition to the curriculum)
-
-## Implementation Details
-
-### 1. Constraint Handling
-
-The system enforces several constraints:
-- No room double-booking
-- No lecturer schedule conflicts
-- Courses must be in required rooms
-- Respect lecturer availability
-- Maintain course duration requirements
-
-### 2. Solution Encoding
-
-Both algorithms use a similar solution encoding:
-- Each solution is an array of values
-- Values are grouped in triplets: [day, period, room]
-- Day ranges: 0-4 (Monday to Friday)
-- Period ranges: 0-7 (8 periods per day)
-- Room ranges: 0-7 (8 available rooms)
-
-### 3. Fitness Evaluation
-
-The fitness function considers:
-1. Hard constraints (must be satisfied):
-   - No scheduling conflicts
-   - Room availability
-   - Lecturer availability
-
-2. Soft constraints (preferences):
-   - Preferred time slots
-   - Room preferences
-   - Continuous scheduling
-
-## Usage Guide
-
-### 1. Initial Setup
-1. Start the application: `streamlit run app.py`
-2. Add courses and lecturers in the "Manage Data" tab
-3. Set up course requirements and lecturer availability
-
-### 2. Generating Timetables
-1. Select optimization algorithm (PSO or GA)
-2. Configure algorithm parameters
-3. Click "Generate Timetable"
-4. View and filter results
-
-### 3. Managing Data
-1. Add new courses with:
-   - Course name
-   - Duration (hours)
-   - Required rooms
-   - Assigned lecturer
-
-2. Add new lecturers with:
-   - Lecturer name
-   - Available days
-
-## Performance Optimization
-
-The system includes several optimizations:
-1. Efficient data structures for constraint checking
-2. Parallel fitness evaluation
-3. Caching of intermediate results
-4. Early termination for invalid solutions
-
-## Future Enhancements
-
-Potential improvements include:
+### 6.1 Planned Features
 1. Multi-objective optimization
 2. Machine learning for parameter tuning
 3. Real-time collaborative editing
 4. Advanced visualization options
 5. Integration with university systems
+
+### 6.2 Potential Improvements
+- Enhanced constraint customization
+- Additional optimization algorithms
+- Mobile-responsive design
+- Export to various formats
+- API integration capabilities
+
+## 7. Troubleshooting
+
+### 7.1 Common Issues
+1. **No Valid Solution Found**
+   - Check constraint strictness
+   - Increase iteration count
+   - Adjust room availability
+
+2. **Poor Quality Solutions**
+   - Tune algorithm parameters
+   - Review constraint weights
+   - Increase population size
+
+3. **Performance Issues**
+   - Reduce problem size
+   - Optimize constraint checking
+   - Use parallel processing
+
+## 8. References
+
+1. Kennedy, J., & Eberhart, R. (1995). Particle Swarm Optimization.
+2. Holland, J. H. (1992). Genetic Algorithms.
+3. Burke, E. K., & Petrovic, S. (2002). Recent research directions in automated timetabling.
+
+---
+
+*Documentation maintained by Mahmoud Nasser*
+*Last updated: April 2025*

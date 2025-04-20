@@ -299,7 +299,25 @@ Below are the key screens that demonstrate the application's functionality and u
 2. Holland, J. H. (1992). Genetic Algorithms.
 3. Burke, E. K., & Petrovic, S. (2002). Recent research directions in automated timetabling.
 
+## 👥 Authors
+
+### Project Team
+- Mahmoud Nasser - Team Lead and Initial Development
+- Adham El-Hwary - Algorithm Implementation
+- Nouran Mousa - UI/UX Development
+- Ramez Emad - Backend Development
+- Shahd Ayman - Testing and Documentation
+
+### Project Supervisor
+- Dr. Amr Ghoniem - Project Advisor and Technical Supervisor
+
+## 🙏 Acknowledgments
+- Dr. Amr Ghoniem for project guidance and supervision
+- Faculty of Computer and Artificial Intelligence Helwan University
+- All team members who contributed to the development and testing
+- Special thanks to the open-source community for their valuable tools and libraries
+
 ---
 
-*Documentation maintained by Mahmoud Nasser*
+*Documentation maintained by the University Timetable Optimizer Team*
 *Last updated: April 2025*

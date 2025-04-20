@@ -1,0 +1,133 @@
+[
+    {
+        "id": 0,
+        "name": "Physics 101",
+        "duration": 2,
+        "required_rooms": [
+            1,
+            2,
+            3
+        ],
+        "lecturer": 0
+    },
+    {
+        "id": 1,
+        "name": "Computer Science 101",
+        "duration": 3,
+        "required_rooms": [
+            2,
+            3,
+            4
+        ],
+        "lecturer": 1
+    },
+    {
+        "id": 2,
+        "name": "Mathematics 101",
+        "duration": 2,
+        "required_rooms": [
+            3,
+            4,
+            5
+        ],
+        "lecturer": 2
+    },
+    {
+        "id": 3,
+        "name": "Chemistry 101",
+        "duration": 2,
+        "required_rooms": [
+            4,
+            5,
+            6
+        ],
+        "lecturer": 3
+    },
+    {
+        "id": 4,
+        "name": "Biology 101",
+        "duration": 2,
+        "required_rooms": [
+            5,
+            6,
+            7
+        ],
+        "lecturer": 4
+    },
+    {
+        "id": 5,
+        "name": "Engineering 101",
+        "duration": 2,
+        "required_rooms": [
+            0,
+            1,
+            2
+        ],
+        "lecturer": 5
+    },
+    {
+        "id": 6,
+        "name": "Physics 102",
+        "duration": 2,
+        "required_rooms": [
+            1,
+            2,
+            3
+        ],
+        "lecturer": 0
+    },
+    {
+        "id": 7,
+        "name": "Art 101",
+        "duration": 2,
+        "required_rooms": [
+            1,
+            2,
+            3
+        ],
+        "lecturer": 1
+    },
+    {
+        "id": 8,
+        "name": "Computer Science 102",
+        "duration": 3,
+        "required_rooms": [
+            2,
+            3,
+            4
+        ],
+        "lecturer": 2
+    },
+    {
+        "id": 9,
+        "name": "Machine Learning",
+        "duration": 2,
+        "required_rooms": [
+            0,
+            1,
+            2
+        ],
+        "lecturer": 0
+    },
+    {
+        "id": 10,
+        "name": "EA",
+        "duration": 2,
+        "required_rooms": [
+            0,
+            1,
+            7
+        ],
+        "lecturer": 5
+    },
+    {
+        "id": 11,
+        "name": "Computational Intelligence",
+        "duration": 2,
+        "required_rooms": [
+            7,
+            5
+        ],
+        "lecturer": 5
+    }
+]

@@ -1,0 +1,156 @@
+{
+    "0": [
+        {
+            "day": 2,
+            "period": 3,
+            "room": 6
+        },
+        {
+            "day": 2,
+            "period": 4,
+            "room": 1
+        }
+    ],
+    "1": [
+        {
+            "day": 0,
+            "period": 5,
+            "room": 2
+        },
+        {
+            "day": 3,
+            "period": 4,
+            "room": 4
+        },
+        {
+            "day": 4,
+            "period": 3,
+            "room": 1
+        }
+    ],
+    "2": [
+        {
+            "day": 3,
+            "period": 2,
+            "room": 3
+        },
+        {
+            "day": 3,
+            "period": 3,
+            "room": 4
+        }
+    ],
+    "3": [
+        {
+            "day": 1,
+            "period": 5,
+            "room": 4
+        },
+        {
+            "day": 4,
+            "period": 6,
+            "room": 6
+        }
+    ],
+    "4": [
+        {
+            "day": 2,
+            "period": 7,
+            "room": 5
+        },
+        {
+            "day": 3,
+            "period": 2,
+            "room": 0
+        }
+    ],
+    "5": [
+        {
+            "day": 0,
+            "period": 2,
+            "room": 6
+        },
+        {
+            "day": 1,
+            "period": 5,
+            "room": 2
+        }
+    ],
+    "6": [
+        {
+            "day": 1,
+            "period": 6,
+            "room": 4
+        },
+        {
+            "day": 4,
+            "period": 4,
+            "room": 5
+        }
+    ],
+    "7": [
+        {
+            "day": 2,
+            "period": 0,
+            "room": 1
+        },
+        {
+            "day": 2,
+            "period": 1,
+            "room": 2
+        }
+    ],
+    "8": [
+        {
+            "day": 1,
+            "period": 3,
+            "room": 4
+        },
+        {
+            "day": 3,
+            "period": 5,
+            "room": 2
+        },
+        {
+            "day": 4,
+            "period": 3,
+            "room": 2
+        }
+    ],
+    "9": [
+        {
+            "day": 0,
+            "period": 4,
+            "room": 1
+        },
+        {
+            "day": 3,
+            "period": 7,
+            "room": 3
+        }
+    ],
+    "10": [
+        {
+            "day": 3,
+            "period": 7,
+            "room": 7
+        },
+        {
+            "day": 4,
+            "period": 5,
+            "room": 0
+        }
+    ],
+    "11": [
+        {
+            "day": 2,
+            "period": 2,
+            "room": 5
+        },
+        {
+            "day": 3,
+            "period": 6,
+            "room": 7
+        }
+    ]
+}

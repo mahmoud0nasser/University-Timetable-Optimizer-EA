@@ -163,7 +163,72 @@ def fitness_function(solution):
    - Filtering options
    - Conflict highlighting
 
-### 4.2 Workflow
+### 4.2 Application Screens
+
+Below are the key screens that demonstrate the application's functionality and user interface:
+
+#### 4.2.1 Home and Navigation
+![Home Page](../Misc/Home.PNG)
+- Clean, intuitive interface
+- Quick access to all major functions
+- Status overview and statistics
+
+#### 4.2.2 Course Management
+![Manage Courses](../Misc/ManageCourses.PNG)
+- Add and edit course information
+- Set course requirements
+- Assign lecturers
+
+![Existing Courses](../Misc/Existing_Courses.PNG)
+- View all courses in the system
+- Quick edit and delete options
+- Filter and search functionality
+
+#### 4.2.3 Lecturer Management
+![Manage Lecturers](../Misc/Manage_Lectures.PNG)
+- Add new lecturers
+- Set availability preferences
+- Define teaching constraints
+
+![Existing Lecturers](../Misc/Existing_Lectures.PNG)
+- Overview of all faculty members
+- Teaching load distribution
+- Availability patterns
+
+#### 4.2.4 Algorithm Configuration
+![Algorithm Settings](../Misc/Algorithm_Setting.PNG)
+- Choose between PSO and GA
+- Set optimization goals
+- Define constraint weights
+
+![Algorithm Parameters](../Misc/Algorithm_Choosing_Parameters.PNG)
+- Fine-tune algorithm parameters
+- Population size and iterations
+- Mutation and crossover rates
+
+#### 4.2.5 Timetable Generation and Results
+![Before Optimization](../Misc/Timetable_before_Applied_Algoirthm.PNG)
+- Initial timetable state
+- Conflict visualization
+- Manual scheduling option
+
+![After PSO](../Misc/Timetable_after_applying_PSO.PNG)
+- Results from PSO algorithm
+- Optimized schedule view
+- Constraint satisfaction indicators
+
+![After GA](../Misc/Timetable_after_applying_Genetic.PNG)
+- Results from Genetic Algorithm
+- Alternative schedule options
+- Performance comparison
+
+#### 4.2.6 Analytics and Statistics
+![Schedule Statistics](../Misc/Scheduled_Stat.PNG)
+- Room utilization metrics
+- Constraint satisfaction rates
+- Optimization performance data
+
+### 4.3 Workflow
 1. **Setup Phase**
    - Add/edit courses
    - Configure lecturer availability
